@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <title></title>
+    <style>
+table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+</style>
+  </head>
+  <body>
+    <p align="right"> <a href="logout">Logout</a> </p>
+    <h2>Welcome, {{ request.session.first_name}}!</h2>
+    <h3>Your trip schedules:</h3>
+    <table>
+      <thead>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Plan</th>
+      </thead>
+      {% for trip in userTrips %}
+      <tr>
+        <td><a href="destination/{{ trip.trip.id }}">{{ trip.trip.destination }}</a></td>
+        <td>{{ trip.trip.travel_start }}</td>
+        <td>{{ trip.trip.travel_end }}</td>
+        <td>{{ trip.trip.description }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <h3>Other users' travel plans</h3>
+    <table>
+      <thead>
+        <th>Name</th>
+        <th>Destination</th>
+        <th>Travel Start Date</th>
+        <th>Travel End Date</th>
+        <th>Do you want to join?</th>
+      </thead>
+      {% for trip in otherUserTrips %}
+            <tr>
+              <td>{{ trip.user.first_name }} {{ trip.user.last_name }}</td>
+              <td><a href="destination/{{ trip.id }}">{{ trip.destination }}</a></td>
+              <td>{{ trip.travel_start }}</td>
+              <td>{{ trip.travel_end }}</td>
+              <td><a href="addToMyTrips/{{ trip.id }}">Join</a></td>
+            </tr>
+      {% endfor %}
+    </table>
+    <p align="right"><a href="addTravelPlan">Add Travel Plan</a></p>
+  </body>
+</html>
