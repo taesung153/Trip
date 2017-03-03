@@ -1,5 +1,5 @@
 """
-WSGI config for belt_round3 project.
+WSGI config for Beltexam project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
